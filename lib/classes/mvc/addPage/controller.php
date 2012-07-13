@@ -3,7 +3,7 @@ require_once('/../model.php');
 require_once('view.php');
 require_once($ba_config->appPath.'lib/functions/checkURL.php');
 require_once($ba_config->appPath.'lib/functions/createDirs.php');
-require_once('../lib/classes/mvc/viewMenuList.php');
+require_once('../lib/classes/mvc/menu/viewMenuList.php');
 /***
  * Контроллер вывода страницы "создания страниц для пользователей"
  */

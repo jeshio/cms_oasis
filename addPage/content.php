@@ -14,7 +14,7 @@ Title страницы:
 <br />
 <select name="formMenuPos">
 <option value="1">Первым в меню</option>
-<?php $ba_menuController->run(3) ?>
+<?php $ba_menuController->runMenuList(0) ?>
 </select>
 <br />
 URL:

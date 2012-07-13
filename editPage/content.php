@@ -13,7 +13,7 @@ Title страницы:
 Позиция в меню:
 <br />
 <select name="formMenuPos">
-<?php $ba_menuController->run(5, $selectPos) ?>
+<?php $ba_menuController->runMenuList(0, 1, $selectPos) ?>
 </select>
 <br />
 Ключевые слова:
