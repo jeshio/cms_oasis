@@ -1,0 +1,6 @@
+# Кодировка CMS
+AddDefaultCharset utf8
+
+# Отключим magic_quotes
+php_flag magic_quotes_gpc off
+php_flag magic_quotes_runtime off
