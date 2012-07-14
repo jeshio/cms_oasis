@@ -13,6 +13,8 @@ class vPages extends model
 		
 		$ba_htmlTitle = $array[$columns->title]; // устнавливаем Title
 		
+		$ba_mode = 1; // Включаем возможность редактирования
+		
         include_once($config->appPath.'control/part/head.php');
 		
 		echo $array[$columns->content];

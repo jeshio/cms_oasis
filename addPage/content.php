@@ -13,7 +13,7 @@ Title страницы:
 Позиция в меню:
 <br />
 <select name="formMenuPos">
-<option value="1">Первым в меню</option>
+<option value="1">После главной</option>
 <?php $ba_menuController->runMenuList(0) ?>
 </select>
 <br />

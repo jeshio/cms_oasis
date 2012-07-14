@@ -22,6 +22,7 @@
 <div class="paddingContent">
 <?php include("menu/leftMenu.php") ?>
 </div>
+<a href="<?=$ba_config->path?>control/addPage">Добавить страницу</a><br/>
 </div>
 <!-- левое меню конец -->
 
@@ -34,9 +35,12 @@
 
 <!-- начало контента -->
 <div id="content">
+<?php if($ba_mode == 1) // админская панель
+{?>
 <!-- Начало админской панели -->
 <div class="string">
 <a href="<?=$ba_config->path.'control/editPage?pageEdit='.dirname($_SERVER['PHP_SELF'])?>">Редактировать</a>
 </div>
 <!-- Конец админской панели -->
+<?php } ?>
 <div class="paddingContent" style="padding-bottom: 50px;">
