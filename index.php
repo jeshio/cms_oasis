@@ -1,5 +1,5 @@
 <?php
-include("lib/classes/mysql.php");
+include("lib/classes/mvc/menu/controller.php");
 
 $ba_mysql = new mysqlConnection;
 $ba_pages = new table_pages;
@@ -10,14 +10,9 @@ $ba_htmlDesc = "CMS Oasis"; // мета-описание
 $ba_htmlKW = "oasis, cms, site, new"; // ключевые слова
 
 include("part/head.php");
-
-include("lib/classes/mvc/content/controller.php");
 ?>
 
 <?php
-$data = new cContent();
-$data->run();
-
 include("part/footer.php");
 
 ?>
