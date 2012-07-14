@@ -20,15 +20,38 @@ class vNewPage extends model
         
     }
 	
-	function showResult($msg)
+	function showResult($mode = 0)
 	{
 		$ba_config = new totalConfig();
-		$ba_htmlTitle = 'Удачное добавление страницы!';
+		$ba_htmlTitle = 'Выполнено.';
 		include_once $ba_config->appPath.'control/part/head.php';
 		
-		echo 'Страница успешно добавлена!';
+		if($mode != 1)
+			echo 'Страница успешно добавлена!';
+		else
+			echo 'Страница успешно отредактирована!';
+
 
 		include_once $ba_config->appPath.'control/part/footer.php';
+	}
+	
+	function showEdit($data)
+	{
+		$ba_config = new totalConfig();
+		$table = new table_controlPages();
+
+		$ba_htmlTitle = 'Редактировать страницу';
+		
+		$title = $data[$table->title];
+		$menuName = $data[$table->menuName];
+		$content = $data[$table->content];
+		$selectPos[$data[$table->pos]] = ' selected';
+		
+		include_once $ba_config->appPath.'/control/part/head.php';
+		
+		include_once $ba_config->appPath.'/control/editPage/content.php';
+		
+		include_once $ba_config->appPath.'/control/part/footer.php'; 
 	}
 	
 	function showError($msg)

@@ -9,6 +9,8 @@ class cNewPage extends model
 {
     var $error;
 	var $result;
+	var $regular = '/[^0-9a-zа-яАаБбВвГгДдЕеЁёЖжЗзИиЙйКкЛлМмНнОоПпРрСсТтУуФфХхЦцЧчШшЩщЪъЫыЬьЭэЮюЯя ]/i';// название меню рег
+    var $regURL = '/[^0-9a-z\/_]/i'; // регулярка для URL
     
     function run()
     {
@@ -76,7 +78,74 @@ class cNewPage extends model
 		if($this->menuPos($table, $menupos) AND $this->addControlPage($title, $menuname, $url, $content, $menupos))
 			vNewPage::showResult($this->result);
 	}
+	
+	function runEdit()
+	{
+		$table = new table_controlPages;
 		
+		$urlEdit = $this->repairURL(filterData($_GET['pageEdit']), 1);
+		
+		$arrayPath = checkURL($urlEdit);
+				
+		if(preg_match($this->regURL, $urlEdit) OR empty($_GET['pageEdit']) OR count($arrayPath) != 0)
+		{
+			$this->error[] .= "Неверный GET-запрос. Такого URL не существует";
+			vNewPage::showError($this->error, 1);
+		}
+		
+		$dataEdit = $this->getControlContent($urlEdit);
+		$dataEdit = mysql_fetch_assoc($dataEdit);
+		if(empty($_POST))
+		{
+			vNewPage::showEdit($dataEdit);
+			exit();
+		}
+				
+		if(empty($_POST['formTitle']))
+			$this->error[] .= "Поле с названием страницы не заполнено";
+		if(empty($_POST['formMenuName']))
+			$this->error[] .= "Поле с названием страницы в меню не заполнено";
+		if(empty($_POST['formContent']))
+			$this->error[] .= "Содержимое страницы не заполнено";
+			
+		if(preg_match($this->regular, $_POST['formMenuName']))
+			$this->error[] .= "Название в меню может содержать только кириллицу или латиницу, цифры и пробелы";
+			
+		if($this->error)
+		{
+			vNewPage::showError($this->error);
+			exit();
+		}
+			
+		$title = filterData($_POST['formTitle'], 255);
+		$menuname = filterData($_POST['formMenuName'], 255);
+		$content = mysql_real_escape_string($_POST['formContent']);
+		$menupos = filterData($_POST['formMenuPos'], 6);
+		
+		if($menupos > $dataEdit[$table->pos])
+		{
+			if($this->menuPos($table, $menupos, '+', $dataEdit[$table->pos]) AND
+			$this->updateControlPage($title, $menuname, $content, $menupos, $urlEdit))
+			{
+				vNewPage::showResult(1);
+			}		
+		}
+		elseif($menupos < $dataEdit[$table->pos])
+		{
+			if($this->menuPos($table, $menupos, '-', $dataEdit[$table->pos]) AND
+			$this->updateControlPage($title, $menuname, $content, $menupos, $urlEdit))
+			{
+				vNewPage::showResult(1);
+			}		
+		}
+		else
+		{
+			if($this->updateControlPage($title, $menuname, $content, $menupos, $urlEdit))
+			{
+				vNewPage::showResult(1);
+			}		
+		}
+	}
 }
 
 

@@ -44,7 +44,7 @@ class vNewPage extends model
 	{
 		$ba_config = new totalConfig();
 
-			$ba_htmlTitle = 'Выполнено.';
+		$ba_htmlTitle = 'Выполнено.';
 		
 		include_once $ba_config->appPath.'/part/head.php';
 		

@@ -1,7 +1,7 @@
 <?php
 require_once('/../model.php');
 /***
- * Ïðåäñòàâëåíèå ñòðàíèö àäìèíêè
+ * ÐŸÑ€ÐµÐ´ÑÑ‚Ð°Ð²Ð»ÐµÐ½Ð¸Ðµ ÑÑ‚Ñ€Ð°Ð½Ð¸Ñ† Ð°Ð´Ð¼Ð¸Ð½ÐºÐ¸
  */
 class vPages extends model
 {
@@ -11,7 +11,7 @@ class vPages extends model
 		
 		$config = new totalConfig();
 		
-		$ba_htmlTitle = $array[$columns->title]; // óñòíàâëèâàåì Title
+		$ba_htmlTitle = $array[$columns->title]; // ÑƒÑÑ‚Ð½Ð°Ð²Ð»Ð¸Ð²Ð°ÐµÐ¼ Title
 		
         include_once($config->appPath.'control/part/head.php');
 		

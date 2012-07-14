@@ -33,4 +33,10 @@
 
 
 <!-- начало контента -->
-<div id="content"><div class="paddingContent" style="padding-bottom: 50px;">
+<div id="content">
+<!-- Начало админской панели -->
+<div class="string">
+<a href="<?=$ba_config->path.'control/editPage?pageEdit='.dirname($_SERVER['PHP_SELF'])?>">Редактировать</a>
+</div>
+<!-- Конец админской панели -->
+<div class="paddingContent" style="padding-bottom: 50px;">

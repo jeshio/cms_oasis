@@ -89,6 +89,17 @@ class model extends mysqlConnection
 		
 		return $this->query($query);
 	}
+	function updateControlPage($title, $menuname, $content, $menupos, $url)
+	{
+		$table = new table_controlPages();
+		$query = 'UPDATE '.$table->table.' SET '.
+		$table->title.' = "'.$title.'",'.
+		$table->menuName.' = "'.$menuname.'",'.
+		$table->content.' = "'.$content.'",'.
+		$table->pos.' = "'.$menupos.'" WHERE '.$table->uri.'="'.$url.'"';
+		
+		return $this->query($query);
+	}
 	/*** menuPos
 	 * Метод для работы с позициями в меню
 	 * $pos - куда нужно установить в меню

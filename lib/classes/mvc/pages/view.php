@@ -9,14 +9,16 @@ class vPages extends model
     {
         $columns = new table_pages();
 		
+		$config = new totalConfig();
+		
 		$ba_htmlTitle = $array[$columns->title];
 		$ba_htmlDesc = $array[$columns->desc];
 		$ba_htmlKW = $array[$columns->kw];
-        include_once('/../../../../part/head.php');
+        include_once($config->appPath.'/part/head.php');
 		
 		echo $array[$columns->content];
 		
-		include_once('/../../../../part/footer.php');
+		include_once($config->appPath.'/part/footer.php');
     }
 	function err() // выводит ошибку 404
 	{
