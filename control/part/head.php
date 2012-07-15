@@ -19,6 +19,7 @@
 
 <!-- левое меню начало -->
 <div class="menuLeft">
+<div class="string"><a href="<?=$ba_config->path?>">На сайт</a></div>
 <div class="paddingContent">
 <?php include("menu/leftMenu.php") ?>
 </div>
