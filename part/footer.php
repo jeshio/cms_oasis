@@ -4,7 +4,7 @@
 <div class="patMenu">
 
 <!-- правое меню начало -->
-<div class="menu">
+<div class="menuRight">
 <div class="paddingContent">
 <?php include("menu/rightMenu.php") ?>
 </div>
@@ -12,6 +12,7 @@
 <!-- правое меню конец -->
 
 <div class="normAd">Рекламный блок</div>
+</div>
 </div>
 <div class="clear"></div>
 </div>

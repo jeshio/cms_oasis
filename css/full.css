@@ -10,23 +10,39 @@
   width: 100%;
   height: 100%;
   background-color: burlywood;
+  font-size: 90px;
+  text-align: center;
+  color: rgba(150, 110, 90, 0);
+  text-shadow: black 0 0 2px, #e3531c 0 0 0;
+  border-radius: 25px 0 0 0;
 }
 #topMidBlock { /* Центральный блок в шапке */
   width: 60%;
+  background-color: burlywood;
   min-width: 480px;
   max-width: 660px;
   height: 110px;
-  outline: 1px solid black;
   float: left;
   display: inline-block;
   overflow: hidden;
 }
-.topBlock { /* Блок в шапке */
+.topBlockLeft { /* Блок в шапке */
   width: 20%;
   min-width: 160px;
   max-width: 220px;
+  border-radius: 25px 0 0 0;
   height:110px;
-  outline: 1px solid black;
+  float: left;
+  display: inline-block;
+  overflow: hidden;
+}
+.topBlockRight { /* Блок в шапке */
+  width: 20%;
+  min-width: 160px;
+  max-width: 220px;
+  background-color: burlywood;
+  border-radius: 0 25px 0 0;
+  height:110px;
   float: left;
   display: inline-block;
   overflow: hidden;
@@ -43,27 +59,56 @@
 }
 .patMenu { /* Основа меню и рекламы под ней */
   width: 20%;
+  height: 100%;
   min-width: 160px;
   max-width: 220px;
   float: left;
 }
-.menu { /* Меню слева и справа */
+.patMenu a {
+  text-decoration: none;
+}
+#allColor { /* Цвет для всего сайта */
+  background: -o-linear-gradient(top, burlywood, #e3531c);
+  float: left;
+  width: 100%;
+  height: 100%;
+  margin: auto;
+}
+.menuLeft { /* Меню слева */
+  width: 100%;
+  height: 100%;
+  min-width: 160px;
+  max-width: 220px;
+  min-height: 370px;
+  box-shadow: -7px 10px white;
+  border-radius: 0 0 0 10px;
+  border-color: white;
+  overflow-x: hidden;
+}
+.menuRight { /* Меню справа */
   width: 100%;
   min-width: 160px;
   max-width: 220px;
   min-height: 370px;
-  outline: 1px solid black;
   display: inline-block;
+  border-radius: 0 0 10px 0;
   overflow-x: hidden;
 }
-.menu a {
-  text-decoration: none;
+.menuUnder {
+  background-color: white;
+  box-sizing:content-box;
+  height: 100%;
+  border-radius: 0 10px 10px 0;
+  overflow: auto;
+  position:relative;
+  
 }
 .blockMenu { /* Блок меню */
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
   margin-bottom: 5px;
+  height: 100%;
 }
 #addPage {
   text-align: center;
@@ -86,21 +131,31 @@
 }
 #content { /* Основное содержание по-середине */
   width: 60%;
+  height: 100%;
   min-width: 480px;
   max-width: 660px;
   min-height: 700px;
-  outline: 1px solid black;
   float: left;
   display: inline-block;
   overflow-x: hidden;
+  background: -o-linear-gradient(top, burlywood, #e3531c);
+}
+#contentColor {
+  min-height: 700px;
+  height: 100%;
+  padding: 7px;
+  padding-bottom: 50px;
+  margin: 10px;
+  background-color: #ecdcac;
+  box-shadow: inset 0 0 6px 2px rgba(0,0,0,1);
 }
 #footer { /* Подвал */
   width: 100%;
   height: 70px;
   min-width: 800px;
   max-width: 1100px;
-  outline: 1px solid black;
+  background-color: #e3531c;
   margin: auto;
   overflow: hidden;
-  margin-top: 1px;
+  border-radius: 5px 5px 15px 15px;
 }

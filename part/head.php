@@ -15,26 +15,29 @@
 <div id="full">
 
 <!-- Шапка -->
-<div class="topBlock">
-<div id="siteLogo">Лого</div>
+<div class="topBlockLeft">
+<div id="siteLogo">Oasis</div>
 </div>
 <div id="topMidBlock">Центральный блок</div>
-<div class="topBlock"><div class="paddingContent">Верхний правый блок</div></div>
+<div class="topBlockRight"><div class="paddingContent">Верхний правый блок</div></div>
 <div class="clear"></div> 
 <!-- Конец Шапки -->
+<div id="allColor">
 <div class="patMenu">
 
 <!-- левое меню начало -->
-<div class="menu">
+<div class="menuLeft">
 <div class="paddingContent">
 <?php include("menu/leftMenu.php") ?>
 </div>
 </div>
 <!-- левое меню конец -->
+<div class="menuUnder">
 <div id="addPage">
 <a href="<?=$ba_config->path.'addPage'?>">Добавить страницу</a>
 </div>
 <div class="normAd">Рекламный блок</div>
+</div>
 </div>
 
 <!-- начало контента -->
@@ -47,4 +50,4 @@
 </div>
 <!-- Конец админской панели -->
 <?php } ?>
-<div class="paddingContent" style="padding-bottom: 50px;">
+<div id="contentColor">
