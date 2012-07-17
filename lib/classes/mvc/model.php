@@ -5,10 +5,13 @@ require_once('/../mysql.php');
  */
 class model extends mysqlConnection
 {
-    function getMenu()
+    function getMenu($mode = 0)
     {
         $table = new table_pages();
-        $query = 'SELECT * FROM '.$table->table.' WHERE '.$table->visible.' = 1 ORDER BY '.$table->pos;
+		if($mode == 0)
+        	$query = 'SELECT '.$table->menuName.', '.$table->uri.' FROM '.$table->table.' WHERE '.$table->visible.' = 1 ORDER BY '.$table->pos;
+		else
+			$query = 'SELECT '.$table->menuName.', '.$table->uri.' FROM '.$table->table.' ORDER BY '.$table->pos;
         return $this->query($query);
     }
 	function getControlMenu()

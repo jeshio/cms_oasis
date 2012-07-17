@@ -5,7 +5,7 @@ require_once('/../model.php');
  */
 class vNewPage extends model
 {
-    function show() // 0 - создание, 1 - редактирование
+    function show()
     {
 		$ba_config = new totalConfig();
 		
@@ -18,7 +18,7 @@ class vNewPage extends model
 		include_once $ba_config->appPath.'/part/footer.php';        
     }
 	
-	function showEdit($data)
+	function showEdit($data, $viewMode = 0)
 	{
 		$ba_config = new totalConfig();
 		$table = new table_pages();
@@ -33,30 +33,52 @@ class vNewPage extends model
 		$selectPos[$data[$table->pos]] = ' selected';
 		$selectVis[$data[$table->visible]] = ' selected';
 		
-		include_once $ba_config->appPath.'/part/head.php';
+		if($viewMode == 0)
+			include_once $ba_config->appPath.'/part/head.php';
+		else
+			include_once $ba_config->appPath.'/control/part/head.php';
 		
 		include_once $ba_config->appPath.'/editPage/content.php';
 		
-		include_once $ba_config->appPath.'/part/footer.php'; 
+		if($viewMode == 0)
+			include_once $ba_config->appPath.'/part/footer.php';
+		else
+		{
+			include_once $ba_config->appPath.'/control/part/footer/begin.php';
+			$list = new cAddPage;
+			$ba_rightMenu = $list->listPagesForEdit();
+			include_once $ba_config->appPath.'/control/part/footer/end.php';
+		}
 	}
 	
-	function showResult($mode = 0)
+	function showResult($mode = 0, $viewMode = 0)
 	{
 		$ba_config = new totalConfig();
 
 		$ba_htmlTitle = 'Выполнено.';
 		
-		include_once $ba_config->appPath.'/part/head.php';
+		if($viewMode == 0)
+			include_once $ba_config->appPath.'/part/head.php';
+		else
+			include_once $ba_config->appPath.'/control/part/head.php';
 		
 		if($mode != 1)
 			echo 'Страница успешно добавлена!';
 		else
 			echo 'Страница успешно отредактирована!';
 
-		include_once $ba_config->appPath.'/part/footer.php';
+		if($viewMode == 0)
+			include_once $ba_config->appPath.'/part/footer.php';
+		else
+		{
+			include_once $ba_config->appPath.'/control/part/footer/begin.php';
+			$list = new cAddPage;
+			$ba_rightMenu = $list->listPagesForEdit();
+			include_once $ba_config->appPath.'/control/part/footer/end.php';
+		}
 	}
 	
-	function showError($msg, $mode = 0)
+	function showError($msg, $mode = 0, $viewMode = 0)
 	{
 		$ba_config = new totalConfig();
 		if($mode != 1)
@@ -64,7 +86,10 @@ class vNewPage extends model
 		else
 			$ba_htmlTitle = 'При редактировании страницы произошли ошибки';
 		
-		include_once $ba_config->appPath.'/part/head.php';
+		if($viewMode == 0)
+			include_once $ba_config->appPath.'/part/head.php';
+		else
+			include_once $ba_config->appPath.'/control/part/head.php';
 		
 		echo 'Некорректные данные:<br /><br />';
 		
@@ -73,7 +98,44 @@ class vNewPage extends model
 			echo $error.'<br />';
 		}
 
-		include_once $ba_config->appPath.'/part/footer.php';
+		if($viewMode == 0)
+			include_once $ba_config->appPath.'/part/footer.php';
+		else
+		{
+			include_once $ba_config->appPath.'/control/part/footer/begin.php';
+			$list = new cAddPage;
+			$ba_rightMenu = $list->listPagesForEdit();
+			include_once $ba_config->appPath.'/control/part/footer/end.php';
+		}
+	}
+	function showDefaultEdit()
+	{
+		$ba_config = new totalConfig();
+		
+		$ba_htmlTitle = 'Редактирование страниц';
+		
+		include_once $ba_config->appPath.'/control/part/head.php';
+		
+		echo 'Выберите страницу, которую хотите редактировать:<br/><br/>';
+		$list = new cAddPage;
+		$ba_rightMenu = $list->listPagesForEdit();
+
+		include_once $ba_config->appPath.'/control/part/footer/begin.php';
+		
+		include_once $ba_config->appPath.'/control/part/footer/end.php';
+	}
+	function showListPagesEdit($pages)
+	{
+		$ba_config = new totalConfig();
+	
+		foreach($pages as $url => $name)
+		{
+			echo '<div class="blockRight">';
+			echo '<b>'.$name.'</b>';
+			echo '<br />';
+			echo '<a href="'.$ba_config->path.'control/users_pages_control?pageEdit='.$url.'">Редактировать</a>';
+			echo '</div>';
+		}
 	}
 }
 

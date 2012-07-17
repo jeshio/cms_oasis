@@ -129,12 +129,14 @@
 .normAd { /* Средний рекламный блок под меню */
   clear: left;
   width: 160px;
-  height: 190px;
-  outline: 1px solid black;
+  min-height: 160px;
+  outline: 1px dotted black;
+  height: 100%;
   margin: auto;
+  text-align: center;
   margin-top: 20px;
   margin-bottom: 20px;
-  overflow: hidden;
+  overflow-x: hidden;
 }
 .paddingContent {
   padding: 7px;

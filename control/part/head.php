@@ -20,9 +20,9 @@
 <div id="menu">
 <!-- левое верхнее меню начало -->
 <div class="menuLeft">
-<div class="string"><a href="<?=$ba_config->path?>">На сайт</a></div>
+<div class="string">Пользовательские страницы</div>
 <div class="paddingContent">
-<?php include("menu/leftMenu.php") ?>
+<?php $ba_menuController->run(1) // список меню ?>
 </div>
 <a href="<?=$ba_config->path?>control/addPage">Добавить страницу</a><br/>
 </div>
@@ -30,9 +30,9 @@
 
 <!-- левое нижнее меню начало -->
 <div class="menuLeft">
+<div class="string">Администрирование</div>
 <div class="paddingContent">
-<a href="<?=$ba_config->path?>control">Главная</a>
-
+<?php include("menu/leftMenu.php") ?>
 </div>
 </div>
 <!-- левое нижнее меню конец -->

@@ -1,5 +1,6 @@
 <?php
-require_once('../lib/classes/mvc/menu/controller.php');
+require_once('/../config.php');
+require_once($ba_config->appPath.'lib/classes/mvc/menu/controller.php');
 ?>
 <form method="POST">
 Title страницы:
