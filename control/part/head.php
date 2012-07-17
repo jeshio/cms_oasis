@@ -17,7 +17,8 @@
 <body>
 <div id="full">
 
-<!-- левое меню начало -->
+<div id="menu">
+<!-- левое верхнее меню начало -->
 <div class="menuLeft">
 <div class="string"><a href="<?=$ba_config->path?>">На сайт</a></div>
 <div class="paddingContent">
@@ -25,7 +26,17 @@
 </div>
 <a href="<?=$ba_config->path?>control/addPage">Добавить страницу</a><br/>
 </div>
-<!-- левое меню конец -->
+<!-- левое верхнее меню конец -->
+
+<!-- левое нижнее меню начало -->
+<div class="menuLeft">
+<div class="paddingContent">
+<a href="<?=$ba_config->path?>control">Главная</a>
+
+</div>
+</div>
+<!-- левое нижнее меню конец -->
+</div>
 
 <!-- Шапка -->
 <div id="topMidBlock"><div class="paddingContent">
