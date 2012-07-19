@@ -25,7 +25,7 @@ class cPages extends model
         $data = mysql_fetch_assoc($q);
 		if($data[$table->visible] == 1)
 		{
-			vPages::show($data, 0);
+			vPages::show($data, 1);
 		}
         else
 		{

@@ -12,7 +12,6 @@ class cAddPage extends model
     var $error;
 	var $result;
 	var $regular = '/[^0-9a-zа-яАаБбВвГгДдЕеЁёЖжЗзИиЙйКкЛлМмНнОоПпРрСсТтУуФфХхЦцЧчШшЩщЪъЫыЬьЭэЮюЯя ]/i';// название меню рег
-    var $regURL = '/[^0-9a-z\/_]/i'; // регулярка для URL
 	
     function run()
     {
@@ -177,7 +176,7 @@ class cAddPage extends model
 		
 		while($menu = mysql_fetch_assoc($q))
 		{
-			$menuList[$menu[$table->uri]] = $menu[$table->menuName];
+			$menuList[$menu[$table->uri]][$menu[$table->visible]] = $menu[$table->menuName];
 		}
 		
 		vNewPage::showListPagesEdit($menuList);		

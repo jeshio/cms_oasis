@@ -131,10 +131,16 @@ class vNewPage extends model
 		foreach($pages as $url => $name)
 		{
 			echo '<div class="blockRight">';
-			echo '<b>'.$name.'</b>';
+			
+			if(!empty($name[1]))
+				echo '<b>'.$name[1].'</b>'; // видимая страница
+			else
+				echo '<font color="red"><b>'.$name[0].'</b></font>'; // невидимая страница
+			
 			echo '<br />';
 			echo '<a href="'.$ba_config->path.'control/users_pages_control?pageEdit='.$url.'">Редактировать</a>';
 			echo '</div>';
+			echo "\n\n";
 		}
 	}
 }

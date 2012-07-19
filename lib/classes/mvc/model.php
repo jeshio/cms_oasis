@@ -5,13 +5,15 @@ require_once('/../mysql.php');
  */
 class model extends mysqlConnection
 {
+	var $regURL = '/[^0-9a-z\/_]/i'; // регулярка для URL
+	
     function getMenu($mode = 0)
     {
         $table = new table_pages();
 		if($mode == 0)
         	$query = 'SELECT '.$table->menuName.', '.$table->uri.' FROM '.$table->table.' WHERE '.$table->visible.' = 1 ORDER BY '.$table->pos;
 		else
-			$query = 'SELECT '.$table->menuName.', '.$table->uri.' FROM '.$table->table.' ORDER BY '.$table->pos;
+			$query = 'SELECT '.$table->menuName.', '.$table->uri.', '.$table->visible.' FROM '.$table->table.' ORDER BY '.$table->pos;
         return $this->query($query);
     }
 	function getControlMenu()
@@ -20,10 +22,15 @@ class model extends mysqlConnection
 		$query = 'SELECT * FROM '.$table->table.' ORDER BY '.$table->pos;
 		return $this->query($query);
 	}
-    function getContent($url)
+    function getContent($url, $col = "")
     {
         $table = new table_pages();
-        $query = 'SELECT * FROM '.$table->table.' WHERE '.$table->uri.'="'.$url.'" LIMIT 1';
+		
+		if(empty($col))
+        	$query = 'SELECT * FROM '.$table->table.' WHERE '.$table->uri.'="'.$url.'" LIMIT 1';
+		else
+			$query = 'SELECT '.$col.' FROM '.$table->table.' WHERE '.$table->uri.'="'.$url.'" LIMIT 1';
+		
         return $this->query($query);
     }
 	function getControlContent($url)
@@ -103,6 +110,14 @@ class model extends mysqlConnection
 		
 		return $this->query($query);
 	}
+	function deletePageForUrl($url)
+	{
+		$table = new table_pages();
+		
+		$query = 'DELETE FROM '.$table->table.' WHERE '.$table->uri.'="'.$url.'"';
+		
+		return $query;
+	}
 	/*** menuPos
 	 * Метод для работы с позициями в меню
 	 * $pos - куда нужно установить в меню
@@ -122,6 +137,11 @@ class model extends mysqlConnection
 		{
 			$query = 'UPDATE '.$table->table.' SET '.$table->pos.' = '.$table->pos.' + 1
 			WHERE '.$table->pos.'>='.$pos.' AND '.$table->pos.'<'.$def;
+		}
+		elseif($mode == 'del')
+		{
+			$query = 'UPDATE '.$table->table.' SET '.$table->pos.' = '.$table->pos.' - 1
+			WHERE '.$table->pos.'>'.$pos;
 		}
 		else
 			die('Неверный параметр метода menuPos в классе файла model.php; line <b>'.__LINE__.'</b>');

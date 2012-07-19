@@ -47,6 +47,7 @@
 <!-- Начало админской панели -->
 <div class="string">
 <a href="<?=$ba_config->path.'editPage?pageEdit='.dirname($_SERVER['PHP_SELF'])?>">Редактировать</a>
+<a href="<?=$ba_config->path.'deletePage?pageDel='.dirname($_SERVER['PHP_SELF'])?>">Удалить</a>
 </div>
 <!-- Конец админской панели -->
 <?php } ?>
