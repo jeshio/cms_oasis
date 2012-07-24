@@ -1,28 +1,30 @@
 <?php
-require_once('/../model.php');
+require_once(dirname(dirname(__FILE__)).'/model.php');
 /***
  * Представление списка меню
  */
 class menuList
 {
-	function showOptionList($array) // метод для выбора позиции при создании страницы
+	static function showOptionList($array = "") // метод для выбора позиции при создании страницы
 	{
         $config = new totalConfig();
 		$count = 2;
         foreach($array as $uri => $menuName)
         {
             $ba_link = $config->path.$uri;
+            empty($count) ? $count = "" : $count;
             echo '<option value="'.$count.'">После '.$menuName."</option>\n";
 			$count++;
         }
 	}
-	function showEditOptionList($array, $sel) // метод для выбора позиции при редактировании страницы
+	static function showEditOptionList($array, $sel) // метод для выбора позиции при редактировании страницы
 	{
         $config = new totalConfig();
 		$count = 1;
         foreach($array as $uri => $menuName)
         {
             $ba_link = $config->path.$uri;
+            empty($sel[$count]) ? $sel[$count] = "" : $sel[$count];
             echo '<option'.$sel[$count].' value="'.$count.'">На место '.$menuName."</option>\n";
 			$count++;
         }

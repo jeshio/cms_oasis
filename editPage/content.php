@@ -1,6 +1,8 @@
 <?php
-require_once('/../config.php');
+require_once(dirname(dirname(__FILE__)).'/config.php');
 require_once($ba_config->appPath.'lib/classes/mvc/menu/controller.php');
+empty($selectVis[0]) ? $selectVis[0] = "" : $selectVis[0];
+empty($selectVis[1]) ? $selectVis[1] = "" : $selectVis[1];
 ?>
 <form method="POST">
 Title страницы:

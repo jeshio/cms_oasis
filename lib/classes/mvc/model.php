@@ -1,5 +1,5 @@
 <?php
-require_once('/../mysql.php');
+require_once(dirname(dirname(__FILE__)).'/mysql.php');
 /***
  * Модель для получения данных из БД
  */
@@ -174,6 +174,8 @@ class model extends mysqlConnection
 	}
 	function repairURL($url) // метод испраляет неправильно написанные URL при создании страницы
 	{
+		$reUrl = NULL;
+		
 		$urlArr = preg_split('/[\/]/', $url, -1, PREG_SPLIT_NO_EMPTY);
 
 		$arrCount = count($urlArr) - 1;

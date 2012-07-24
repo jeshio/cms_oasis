@@ -1,11 +1,11 @@
 <?php
-require_once('/../model.php');
+require_once(dirname(dirname(__FILE__)).'/model.php');
 /***
  * Представление страницы "создания страниц для пользователей"
  */
 class vNewPage extends model
 {
-    function show()
+    static function show()
     {
 		$ba_config = new totalConfig();
 		
@@ -18,7 +18,7 @@ class vNewPage extends model
 		include_once $ba_config->appPath.'/part/footer.php';        
     }
 	
-	function showEdit($data, $viewMode = 0)
+	static function showEdit($data, $viewMode = 0)
 	{
 		$ba_config = new totalConfig();
 		$table = new table_pages();
@@ -51,7 +51,7 @@ class vNewPage extends model
 		}
 	}
 	
-	function showResult($mode = 0, $viewMode = 0)
+	static function showResult($mode = 0, $viewMode = 0)
 	{
 		$ba_config = new totalConfig();
 
@@ -78,7 +78,7 @@ class vNewPage extends model
 		}
 	}
 	
-	function showError($msg, $mode = 0, $viewMode = 0)
+	static function showError($msg, $mode = 0, $viewMode = 0)
 	{
 		$ba_config = new totalConfig();
 		if($mode != 1)
@@ -108,7 +108,7 @@ class vNewPage extends model
 			include_once $ba_config->appPath.'/control/part/footer/end.php';
 		}
 	}
-	function showDefaultEdit()
+	static function showDefaultEdit()
 	{
 		$ba_config = new totalConfig();
 		
@@ -124,7 +124,7 @@ class vNewPage extends model
 		
 		include_once $ba_config->appPath.'/control/part/footer/end.php';
 	}
-	function showListPagesEdit($pages)
+	static function showListPagesEdit($pages)
 	{
 		$ba_config = new totalConfig();
 	

@@ -1,18 +1,21 @@
 <?php
-    require_once '/../../config.php';
+    require_once dirname(dirname(dirname(__FILE__))).'/config.php';
 	$ba_config = new totalConfig;
 	require_once $ba_config->appPath.'lib/classes/mvc/menu/controller.php';
+	empty($ba_htmlHead) ? $ba_htmlHead = "" : $ba_htmlHead;
+	empty($ba_htmlTitle) ? $ba_htmlTitle = "" : $ba_htmlTitle;
+	empty($ba_mode) ? $ba_mode=0 : $ba_mode;
 ?>
 <!DOCTYPE html>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title><?php echo $ba_htmlTitle ?></title>
+    <title><?=$ba_htmlTitle?></title>
 
     <style type="text/css">
-    <?php include '/../css/control.css'; ?>
+    <?php include dirname(dirname(__FILE__)).'/css/control.css'; ?>
     </style>
-    <?php echo $ba_htmlHead // если будут дополнительные параметры ?>
+    <?=$ba_htmlHead // если будут дополнительные параметры ?>
 </head>
 <body>
 <div id="full">

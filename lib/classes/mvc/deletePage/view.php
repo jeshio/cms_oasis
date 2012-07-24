@@ -1,11 +1,11 @@
 <?php
-require_once('/../model.php');
+require_once(dirname(dirname(__FILE__)).'/model.php');
 /***
  * Представление страницы "Удаление пользовательских страниц"
  */
  class vDelPage
  {
- 	function showConfirm()
+ 	static function showConfirm()
 	{
 		$ba_config = new totalConfig();
 		
@@ -15,7 +15,7 @@ require_once('/../model.php');
 		
 		include($ba_config->appPath.'part/footer.php');
 	}
-	function showError()
+	static function showError()
 	{
 		$ba_config = new totalConfig();
 		
@@ -25,7 +25,7 @@ require_once('/../model.php');
 		
 		include($ba_config->appPath.'part/footer.php');
 	}
-	function showResult()
+	static function showResult()
 	{
 		$ba_config = new totalConfig();
 		

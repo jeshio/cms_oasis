@@ -1,5 +1,5 @@
 <?php
-require_once('/../model.php');
+require_once(dirname(dirname(__FILE__)).'/model.php');
 require_once('view.php');
 /***
  * Контроллер страниц
@@ -22,14 +22,19 @@ class cPages extends model
 		
         $table = new table_pages();
         $q = $this->getContent($url);
+
         $data = mysql_fetch_assoc($q);
+
 		if($data[$table->visible] == 1)
 		{
 			vPages::show($data, 1);
+			exit();
 		}
         else
 		{
 			vPages::err();
+			echo 'Worked 2!';
+			exit();
 		}
     }
 }

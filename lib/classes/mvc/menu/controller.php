@@ -1,5 +1,5 @@
 <?php
-require_once('/../model.php');
+require_once(dirname(dirname(__FILE__)).'/model.php');
 require_once('view.php');
 require_once('viewMenuList.php');
 /***
@@ -12,6 +12,7 @@ class cMenu extends model
 	// $mode - как и какие данные показать (0 - обычное меню, другое значение - админское меню)
     function run($mode = 0) 
     {
+		$res = NULL;
 	    if($mode == 0)
 		{
 			$table = new table_pages;
@@ -60,16 +61,19 @@ class cMenu extends model
             $res[] = $data[$table->menuName];
         }
 		
-		if($mode == 0)
-		{
-			menuList::showOptionList($res);
+		if(!empty($res))
+		{	
+			if($mode == 0)
+			{
+				menuList::showOptionList($res);
+			}
+			elseif($mode == 1)
+			{
+				menuList::showEditOptionList($res, $sel);
+			}
+			else
+				die('Неверный аргумент $mode метода runMenuList: Line <b>'.__LINE__.'</b> - <b>'.__FILE__.'</b>');
 		}
-		elseif($mode == 1)
-		{
-			menuList::showEditOptionList($res, $sel);
-		}
-		else
-			die('Неверный аргумент $mode метода runMenuList: Line <b>'.__LINE__.'</b> - <b>'.__FILE__.'</b>');
 	}
 
 }

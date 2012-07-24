@@ -1,4 +1,5 @@
 <?php
+
 include("lib/classes/mvc/menu/controller.php");
 
 $ba_mysql = new mysqlConnection;

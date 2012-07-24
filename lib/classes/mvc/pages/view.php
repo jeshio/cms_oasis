@@ -1,11 +1,11 @@
 <?php
-require_once('/../model.php');
+require_once(dirname(dirname(__FILE__)).'/model.php');
 /***
  * Представление страниц
  */
 class vPages extends model
 {
-    function show($array, $ba_mode = 0) // $ba_mode - режим админа
+    static function show($array, $ba_mode = 0) // $ba_mode - режим админа
     {
         $columns = new table_pages();
 		
@@ -20,7 +20,7 @@ class vPages extends model
 		
 		include_once($config->appPath.'/part/footer.php');
     }
-	function err() // выводит ошибку 404
+	static function err() // выводит ошибку 404
 	{
 		$sapi_name = php_sapi_name();
 		if ($sapi_name == 'cgi' || $sapi_name == 'cgi-fcgi')

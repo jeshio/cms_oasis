@@ -10,12 +10,14 @@
 * функция возвратит массивы: 0 - /public/www/cool, 1 - /public/www/cool/bot, 2 - /public/www/cool/bot/hi
 */
 
-require_once("/../../config.php");
+require_once(dirname(dirname(dirname(__FILE__)))."/config.php");
 
-define(appData, substr($ba_config->appPath, 0, strlen($ba_config->appPath) - 1));
+define('appData', substr($ba_config->appPath, 0, strlen($ba_config->appPath) - 1));
 
 function checkURL($dir, $topDir = appData)
 {
+	$result = NULL;
+	$tempDir = NULL;
 	$Dirs = preg_split('/[\/]/', $dir, -1, PREG_SPLIT_NO_EMPTY);
 
 	foreach($Dirs as $key => $dirName)

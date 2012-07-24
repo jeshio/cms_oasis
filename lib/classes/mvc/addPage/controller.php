@@ -1,5 +1,5 @@
 <?php
-require_once('/../model.php');
+require_once(dirname(dirname(__FILE__)).'/model.php');
 require_once('view.php');
 require_once($ba_config->appPath.'lib/functions/checkURL.php');
 require_once($ba_config->appPath.'lib/functions/createDirs.php');
@@ -146,7 +146,8 @@ class cAddPage extends model
 		
 		if($menupos > $dataEdit[$table->pos])
 		{
-			if($this->menuPos($table, $menupos, '+', $dataEdit[$table->pos]) AND
+			if($this->menuPos($table, $menupos, '+', $dataEdit[$table->pos])
+			AND
 			$this->updatePage($title, $menuname, $keyWords, $description, $content, $menupos, $visible, $urlEdit))
 			{
 				vNewPage::showResult(1, $viewMode);
@@ -154,7 +155,8 @@ class cAddPage extends model
 		}
 		elseif($menupos < $dataEdit[$table->pos])
 		{
-			if($this->menuPos($table, $menupos, '-', $dataEdit[$table->pos]) AND
+			if($this->menuPos($table, $menupos, '-', $dataEdit[$table->pos])
+			AND
 			$this->updatePage($title, $menuname, $keyWords, $description, $content, $menupos, $visible, $urlEdit))
 			{
 				vNewPage::showResult(1, $viewMode);

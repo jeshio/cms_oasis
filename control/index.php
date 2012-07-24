@@ -1,5 +1,5 @@
 <?php
-include '../lib/classes/mysql.php';
+include dirname(dirname(__FILE__)).'/lib/classes/mysql.php';
 include 'part/head.php';
 
 ?>

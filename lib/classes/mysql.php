@@ -1,5 +1,5 @@
 <?php
-require_once("/../../config.php");
+require_once(dirname(dirname(dirname(__FILE__)))."/config.php");
 require_once($ba_config->appPath."lib/functions/safeFilterData.php");
 
 /*
@@ -136,7 +136,7 @@ class table_pages
                $this->kw.' CHAR(255) NOT NULL, '.
                $this->desc.' CHAR(255) NOT NULL, '.
                $this->content.' TEXT NOT NULL, '.
-               $this->visible.' BIT NOT NULL, '.
+               $this->visible.' TINYINT(1) NOT NULL, '.
                $this->uri.' CHAR(255) NOT NULL, '.
                $this->created.' TIMESTAMP, '.
                $this->modTime.' TIMESTAMP, 

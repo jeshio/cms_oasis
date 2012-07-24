@@ -1,11 +1,11 @@
 <?php
-require_once('/../model.php');
+require_once(dirname(dirname(__FILE__)).'/model.php');
 /***
  * Представление страниц админки
  */
 class vPages extends model
 {
-    function show($array)
+    static function show($array)
     {
         $columns = new table_controlPages();
 		

@@ -1,11 +1,11 @@
 <?php
-require_once('/../model.php');
+require_once(dirname(dirname(__FILE__)).'/model.php');
 /***
  * Представление страницы "создания страниц"
  */
 class vNewPage extends model
 {
-    function show()
+    static function show()
     {
 		$ba_config = new totalConfig();
 		
@@ -20,7 +20,7 @@ class vNewPage extends model
         
     }
 	
-	function showResult($mode = 0)
+	static function showResult($mode = 0)
 	{
 		$ba_config = new totalConfig();
 		$ba_htmlTitle = 'Выполнено.';
@@ -35,7 +35,7 @@ class vNewPage extends model
 		include_once $ba_config->appPath.'control/part/footer.php';
 	}
 	
-	function showEdit($data)
+	static function showEdit($data)
 	{
 		$ba_config = new totalConfig();
 		$table = new table_controlPages();
@@ -54,7 +54,7 @@ class vNewPage extends model
 		include_once $ba_config->appPath.'/control/part/footer.php'; 
 	}
 	
-	function showError($msg)
+	static function showError($msg)
 	{
 		$ba_config = new totalConfig();
 		$ba_htmlTitle = 'При создании страницы произошли ошибки';
