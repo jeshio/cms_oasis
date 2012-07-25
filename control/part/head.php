@@ -27,7 +27,7 @@
 <div class="paddingContent">
 <?php $ba_menuController->run(1) // список меню ?>
 </div>
-<a href="<?=$ba_config->path?>control/addPage">Добавить страницу</a><br/>
+<a href="<?=$ba_config->path?>control/addControlPage">Добавить страницу</a><br/>
 </div>
 <!-- левое верхнее меню конец -->
 
@@ -43,7 +43,7 @@
 
 <!-- Шапка -->
 <div id="topMidBlock"><div class="paddingContent">
-Центральный блок
+<a href="<?=$ba_config->path?>">На сайт</a>
 </div></div>
 <!-- Конец Шапки -->
 

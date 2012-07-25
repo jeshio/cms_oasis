@@ -119,3 +119,11 @@ a {
   overflow-x: hidden;
   z-index: 100;
 }
+.pagesParams {
+  margin-right: 5px;
+  float: left;
+}
+#addPageLink {
+  text-align: center;
+  margin-top: 9px;
+}

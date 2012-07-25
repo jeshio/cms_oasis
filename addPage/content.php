@@ -1,5 +1,5 @@
 <?php
-require_once('../lib/classes/mvc/menu/controller.php');
+require_once(dirname(dirname(__FILE__)).'/lib/classes/mvc/menu/controller.php');
 ?>
 <form method="POST">
 Title страницы:

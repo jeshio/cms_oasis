@@ -10,7 +10,7 @@ require_once($ba_config->appPath.'lib/classes/mvc/menu/viewMenuList.php');
  */
  class cDelPage extends model
  {
- 	function run($getUrl = "", $post = "")
+ 	function run($getUrl = "", $post = "", $viewMode = 0) // $viewMode - если не равен 0, то выводится редактирование страницы в админке
 	{
 		$table = new table_pages();
 		
@@ -22,21 +22,23 @@ require_once($ba_config->appPath.'lib/classes/mvc/menu/viewMenuList.php');
 		
 		if(preg_match($this->regURL, $urlDel) OR empty($urlDel) OR count($arrayPath) != 0)
 		{
-			vDelPage::showError();
+			vDelPage::showError($viewMode);
 			exit();
 		}
 		
 		if(empty($post))
 		{
-			vDelPage::showConfirm();
+			vDelPage::showConfirm($viewMode);
 			exit();
 		}
 		
 		
 		if(!empty($post['cancel']))
 		{
-			header("Location: ".$config->path.$urlDel);
-			echo $config->appPath.$urlDel;
+			if($viewMode == 0)
+				header("Location: ".$config->path.$urlDel);
+			else
+				header("Location: ".$config->path.'control/users_pages_control');
 		}
 		elseif(!empty($post['confirm']))
 		{
@@ -48,7 +50,7 @@ require_once($ba_config->appPath.'lib/classes/mvc/menu/viewMenuList.php');
 			
 			removeDir($config->appPath.$urlDel);
 			
-			vDelPage::showResult();
+			vDelPage::showResult($viewMode);
 		}
 	}
  }

@@ -13,7 +13,7 @@ class cAddPage extends model
 	var $result;
 	var $regular = '/[^0-9a-zа-яАаБбВвГгДдЕеЁёЖжЗзИиЙйКкЛлМмНнОоПпРрСсТтУуФфХхЦцЧчШшЩщЪъЫыЬьЭэЮюЯя ]/i';// название меню рег
 	
-    function run()
+    function run($viewMode = 0)
     {
 		$table = new table_pages;
 		$config = new totalConfig();
@@ -27,7 +27,7 @@ class cAddPage extends model
 		
 		if(empty($_POST)) // дефолтное состояние
 		{	
-			vNewPage::show();
+			vNewPage::show($viewMode);
 			exit();
 		}
 		
@@ -69,7 +69,7 @@ class cAddPage extends model
 		
 		if($this->error)
 		{
-			vNewPage::showError($this->error);
+			vNewPage::showError($this->error, 0, $viewMode);
 			exit();
 		}
 		
@@ -82,7 +82,7 @@ class cAddPage extends model
 			
 			$this->createURL($arrayPath[count($arrayPath) - 1], $fileContent); // создаём файл index.php
 			
-			vNewPage::showResult();
+			vNewPage::showResult(0, $viewMode);
 		}
 	}
 	

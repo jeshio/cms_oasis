@@ -13,7 +13,7 @@ class vNewPage extends model
 		
 		include_once $ba_config->appPath.'control/part/head.php';
 		
-		include_once $ba_config->appPath.'control/addPage/content.php';
+		include_once $ba_config->appPath.'control/addControlPage/content.php';
 
 		include_once $ba_config->appPath.'control/part/footer.php';
         
