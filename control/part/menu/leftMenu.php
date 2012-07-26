@@ -6,4 +6,4 @@
 */
 ?>
 <div class="blockMenu"><a href="<?=$ba_config->path?>control">Главная</a></div>
-<div class="blockMenu"><a href="<?=$ba_config->path?>control/users_pages_control">Редактировать страницы</a></div>
+<div class="blockMenu"><a href="<?=$ba_config->path?>control/users_pages_control">Управление страницами</a></div>

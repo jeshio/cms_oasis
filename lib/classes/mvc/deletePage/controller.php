@@ -10,9 +10,12 @@ require_once($ba_config->appPath.'lib/classes/mvc/menu/viewMenuList.php');
  */
  class cDelPage extends model
  {
- 	function run($getUrl = "", $post = "", $viewMode = 0) // $viewMode - если не равен 0, то выводится редактирование страницы в админке
+ 	function run($getUrl = "", $post = "", $viewMode = 0, $pageType = 0) // $viewMode - если не равен 0, то выводится редактирование страницы в админке
 	{
-		$table = new table_pages();
+		if($pageType == 0)
+			$table = new table_pages();
+		else
+			$table = new table_controlPages();
 		
 		$config = new totalConfig();
 		
@@ -22,35 +25,35 @@ require_once($ba_config->appPath.'lib/classes/mvc/menu/viewMenuList.php');
 		
 		if(preg_match($this->regURL, $urlDel) OR empty($urlDel) OR count($arrayPath) != 0)
 		{
-			vDelPage::showError($viewMode);
+			vDelPage::showError($viewMode, $pageType);
 			exit();
 		}
 		
 		if(empty($post))
 		{
-			vDelPage::showConfirm($viewMode);
+			vDelPage::showConfirm($viewMode, $pageType);
 			exit();
 		}
 		
 		
 		if(!empty($post['cancel']))
 		{
-			if($viewMode == 0)
+			if($viewMode == 0 OR $pageType != 0)
 				header("Location: ".$config->path.$urlDel);
 			else
 				header("Location: ".$config->path.'control/users_pages_control');
 		}
 		elseif(!empty($post['confirm']))
 		{
-			$positionMenu = mysql_fetch_assoc($this->getContent($urlDel, $table->pos));
+			$positionMenu = mysql_fetch_assoc($this->getContent($urlDel, $table->pos, $pageType));
 			
 			$this->menuPos($table, $positionMenu[$table->pos], 'del');
 			
-			$this->query($this->deletePageForUrl($urlDel));
+			$this->query($this->deletePageForUrl($urlDel, $table));
 			
 			removeDir($config->appPath.$urlDel);
 			
-			vDelPage::showResult($viewMode);
+			vDelPage::showResult($viewMode, $pageType);
 		}
 	}
  }

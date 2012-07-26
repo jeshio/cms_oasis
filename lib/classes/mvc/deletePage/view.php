@@ -6,7 +6,7 @@ require_once(dirname(dirname(__FILE__)).'/addPage/controller.php');
  */
  class vDelPage
  {
- 	static function showConfirm($viewMode = 0)
+ 	static function showConfirm($viewMode = 0, $pageType = 0)
 	{
 		$ba_config = new totalConfig();
 		
@@ -24,12 +24,15 @@ require_once(dirname(dirname(__FILE__)).'/addPage/controller.php');
 		else
 		{
 			include_once $ba_config->appPath.'/control/part/footer/begin.php';
-			$list = new cAddPage;
-			$ba_rightMenu = $list->listPagesForEdit();
+			if($pageType == 0)
+			{
+				$list = new cAddPage;
+				$ba_rightMenu = $list->listPagesForEdit();
+			}
 			include_once $ba_config->appPath.'/control/part/footer/end.php';
 		}
 	}
-	static function showError($viewMode = 0)
+	static function showError($viewMode = 0, $pageType = 0)
 	{
 		$ba_config = new totalConfig();
 		
@@ -47,12 +50,15 @@ require_once(dirname(dirname(__FILE__)).'/addPage/controller.php');
 		else
 		{
 			include_once $ba_config->appPath.'/control/part/footer/begin.php';
-			$list = new cAddPage;
-			$ba_rightMenu = $list->listPagesForEdit();
+			if($pageType == 0)
+			{
+				$list = new cAddPage;
+				$ba_rightMenu = $list->listPagesForEdit();
+			}
 			include_once $ba_config->appPath.'/control/part/footer/end.php';
 		}
 	}
-	static function showResult($viewMode = 0)
+	static function showResult($viewMode = 0, $pageType = 0)
 	{
 		$ba_config = new totalConfig();
 		
@@ -70,8 +76,11 @@ require_once(dirname(dirname(__FILE__)).'/addPage/controller.php');
 		else
 		{
 			include_once $ba_config->appPath.'/control/part/footer/begin.php';
-			$list = new cAddPage;
-			$ba_rightMenu = $list->listPagesForEdit();
+			if($pageType == 0)
+			{
+				$list = new cAddPage;
+				$ba_rightMenu = $list->listPagesForEdit();
+			}
 			include_once $ba_config->appPath.'/control/part/footer/end.php';
 		}
 	}

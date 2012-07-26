@@ -123,11 +123,11 @@ class vNewPage extends model
 	{
 		$ba_config = new totalConfig();
 		
-		$ba_htmlTitle = 'Редактирование страниц';
+		$ba_htmlTitle = 'Управление страницами сайта';
 		
 		include_once $ba_config->appPath.'/control/part/head.php';
 		
-		echo 'Выберите страницу, которую хотите редактировать:<br/><br/>';
+		echo 'Страницы, отображаемые в меню на сайте:<br/><br/>';
 		$list = new cAddPage;
 		$ba_rightMenu = $list->listPagesForEdit();
 

@@ -22,9 +22,12 @@ class model extends mysqlConnection
 		$query = 'SELECT * FROM '.$table->table.' ORDER BY '.$table->pos;
 		return $this->query($query);
 	}
-    function getContent($url, $col = "")
+    function getContent($url, $col = "", $mode = 0)
     {
-        $table = new table_pages();
+		if($mode == 0)
+			$table = new table_pages();
+		else
+			$table = new table_controlPages();
 		
 		if(empty($col))
         	$query = 'SELECT * FROM '.$table->table.' WHERE '.$table->uri.'="'.$url.'" LIMIT 1';
@@ -110,10 +113,8 @@ class model extends mysqlConnection
 		
 		return $this->query($query);
 	}
-	function deletePageForUrl($url)
-	{
-		$table = new table_pages();
-		
+	function deletePageForUrl($url, $table)
+	{		
 		$query = 'DELETE FROM '.$table->table.' WHERE '.$table->uri.'="'.$url.'"';
 		
 		return $query;
