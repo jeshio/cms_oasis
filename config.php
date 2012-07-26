@@ -7,7 +7,7 @@ class totalConfig
 	var $appPath; // путь для инклудов
 
     var $login = "root"; // логин
-    var $pass = "root"; // пароль
+    var $pass = ""; // пароль
     var $host = "localhost"; // хост
     var $port = 3306; // порт
     
