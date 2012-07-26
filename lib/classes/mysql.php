@@ -75,8 +75,7 @@ class mysqlConnection extends totalConfig
  */
 class table_pages
 {
-    var $ba_prefix = "oasis_"; // префикс для таблиц
-    var $table; // название таблицы
+    var $table = 'pages'; // название таблицы
     var $title = 'title'; // title страницы
     var $menuName = 'menuName'; // название в меню
     var $pos = 'position'; // позиция страницы в меню
@@ -88,9 +87,10 @@ class table_pages
     var $modTime = 'modification'; // время редактирования
     var $uri = 'uri'; // URI страницы
     
-    function __construct($table = 'pages')
+    function __construct()
     {
-        $this->table = $this->ba_prefix.$table;
+		$config = new totalConfig();
+        $this->table = $config->prefix.$this->table;
     }
     
     /** Метод возвращает MySQL запрос для добавления данных в таблицу
@@ -150,17 +150,17 @@ class table_pages
  */
 class table_controlPages
 {
-    var $ba_prefix = "oasis_"; // префикс для таблиц
-    var $table; // название таблицы
+    var $table = 'controlPages'; // название таблицы
     var $title = 'title'; // title страницы
     var $menuName = 'menuName'; // название в меню
     var $pos = 'position'; // позиция страницы в меню
     var $content = 'content'; // содержимое страницы
     var $uri = 'uri'; // URI страницы
     
-    function __construct($table = 'controlPages')
+    function __construct()
     {
-        $this->table = $this->ba_prefix.$table;
+		$config = new totalConfig();
+        $this->table = $config->prefix.$this->table;
     }
     
     /** Метод возвращает MySQL запрос для добавления данных в таблицу

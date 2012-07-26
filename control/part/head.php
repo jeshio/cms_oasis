@@ -21,7 +21,17 @@
 <div id="full">
 
 <div id="menu">
+	
 <!-- левое верхнее меню начало -->
+<div class="menuLeft">
+<div class="string">Администрирование</div>
+<div class="paddingContent">
+<?php include("menu/leftMenu.php") ?>
+</div>
+</div>
+<!-- левое верхнее меню конец -->
+
+<!-- левое нижнее меню начало -->
 <div class="menuLeft">
 <div class="string">Пользовательские страницы</div>
 <div class="paddingContent">
@@ -29,16 +39,8 @@
 </div>
 <a href="<?=$ba_config->path?>control/addControlPage">Добавить страницу</a><br/>
 </div>
-<!-- левое верхнее меню конец -->
-
-<!-- левое нижнее меню начало -->
-<div class="menuLeft">
-<div class="string">Администрирование</div>
-<div class="paddingContent">
-<?php include("menu/leftMenu.php") ?>
-</div>
-</div>
 <!-- левое нижнее меню конец -->
+
 </div>
 
 <!-- Шапка -->
