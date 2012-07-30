@@ -15,6 +15,7 @@ empty($ba_htmlKW) ? $ba_htmlKW = "" : $ba_htmlKW;
     <style type="text/css">
     <?php include dirname(dirname(__FILE__)).'/css/full.css'; ?>
     </style>
+    <link rel="shortcut icon" href="/favicon.ico" />
     <?=$ba_htmlHead // если будут дополнительные параметры ?>
 </head>
 <body>

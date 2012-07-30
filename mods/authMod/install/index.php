@@ -6,7 +6,6 @@ $tableUsers = new tableUsers();
 
 if($mysql->table_exists($tableUsers->table))
 {
-	echo $tableUsers->createTable().'<br /><br />';
 	$mysql->query($tableUsers->createTable());
 	echo 'Таблица '.$tableUsers->table.' успешно создана!';
 	exit();

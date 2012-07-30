@@ -15,6 +15,7 @@
     <style type="text/css">
     <?php include dirname(dirname(__FILE__)).'/css/control.css'; ?>
     </style>
+    <link rel="shortcut icon" href="/favicon.ico" />
     <?=$ba_htmlHead // если будут дополнительные параметры ?>
 </head>
 <body>
