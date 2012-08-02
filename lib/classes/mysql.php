@@ -75,8 +75,7 @@ class mysqlConnection extends totalConfig
  */
 class table_pages
 {
-    var $ba_prefix = "oasis_"; // префикс для таблиц
-    var $table; // название таблицы
+    var $table = 'pages'; // название таблицы
     var $title = 'title'; // title страницы
     var $menuName = 'menuName'; // название в меню
     var $pos = 'position'; // позиция страницы в меню
@@ -88,9 +87,10 @@ class table_pages
     var $modTime = 'modification'; // время редактирования
     var $uri = 'uri'; // URI страницы
     
-    function __construct($table = 'pages')
+    function __construct()
     {
-        $this->table = $this->ba_prefix.$table;
+		$config = new totalConfig();
+        $this->table = $config->prefix.$this->table;
     }
     
     /** Метод возвращает MySQL запрос для добавления данных в таблицу
@@ -130,14 +130,14 @@ class table_pages
         $config = new totalConfig;
         return 'CREATE TABLE IF NOT EXISTS '.$this->table.'('.
                $config->id.' MEDIUMINT NOT NULL AUTO_INCREMENT, '.
-               $this->title.' CHAR(255) NOT NULL, '.
-               $this->menuName.' CHAR(255) NOT NULL, '.
+               $this->title.' VARCHAR(255) NOT NULL, '.
+               $this->menuName.' VARCHAR(255) NOT NULL, '.
                $this->pos.' SMALLINT NOT NULL, '.
-               $this->kw.' CHAR(255) NOT NULL, '.
-               $this->desc.' CHAR(255) NOT NULL, '.
+               $this->kw.' VARCHAR(255) NOT NULL, '.
+               $this->desc.' VARCHAR(255) NOT NULL, '.
                $this->content.' TEXT NOT NULL, '.
                $this->visible.' TINYINT(1) NOT NULL, '.
-               $this->uri.' CHAR(255) NOT NULL, '.
+               $this->uri.' VARCHAR(255) NOT NULL, '.
                $this->created.' TIMESTAMP, '.
                $this->modTime.' TIMESTAMP, 
                PRIMARY KEY('.$config->id.')
@@ -150,17 +150,17 @@ class table_pages
  */
 class table_controlPages
 {
-    var $ba_prefix = "oasis_"; // префикс для таблиц
-    var $table; // название таблицы
+    var $table = 'controlPages'; // название таблицы
     var $title = 'title'; // title страницы
     var $menuName = 'menuName'; // название в меню
     var $pos = 'position'; // позиция страницы в меню
     var $content = 'content'; // содержимое страницы
     var $uri = 'uri'; // URI страницы
     
-    function __construct($table = 'controlPages')
+    function __construct()
     {
-        $this->table = $this->ba_prefix.$table;
+		$config = new totalConfig();
+        $this->table = $config->prefix.$this->table;
     }
     
     /** Метод возвращает MySQL запрос для добавления данных в таблицу
@@ -200,11 +200,11 @@ class table_controlPages
         $config = new totalConfig;
         return 'CREATE TABLE '.$this->table.'('.
                $config->id.' MEDIUMINT NOT NULL AUTO_INCREMENT, '.
-               $this->title.' CHAR(255) NOT NULL, '.
-               $this->menuName.' CHAR(255) NOT NULL, '.
+               $this->title.' VARCHAR(255) NOT NULL, '.
+               $this->menuName.' VARCHAR(255) NOT NULL, '.
                $this->pos.' SMALLINT NOT NULL, '.
                $this->content.' TEXT NOT NULL, '.
-               $this->uri.' CHAR(255) NOT NULL,
+               $this->uri.' VARCHAR(255) NOT NULL,
                PRIMARY KEY('.$config->id.')
                ) ENGINE = MYISAM COLLATE utf8_general_ci';
     }

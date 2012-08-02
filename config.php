@@ -13,6 +13,7 @@ class totalConfig
     
     var $id = 'id'; // название колонки с уникальным номером
     var $db = "oasis"; // название базы данных
+    var $prefix = "oasis_"; // префикс для таблиц
 	
 	function __construct ()
 	{

@@ -1,6 +1,7 @@
 <?php
 require_once(dirname(dirname(__FILE__)).'/model.php');
 require_once('view.php');
+require_once($ba_config->appPath.'mods/authMod/mvc/permissions/controller.php');
 /***
  * Контроллер страниц
  */
@@ -8,6 +9,11 @@ class cPages extends model
 {
     function run()
     {
+    	$usersPerms = new cUser();
+    	
+    	if(!$usersPerms->seePage)
+    		$usersPerms->forbidden();
+    	
 		$urlArr = preg_split('/[\/]/', $_SERVER['PHP_SELF'], -1, PREG_SPLIT_NO_EMPTY);
 
 		$arrCount = count($urlArr) - 2;
@@ -33,7 +39,6 @@ class cPages extends model
         else
 		{
 			vPages::err();
-			echo 'Worked 2!';
 			exit();
 		}
     }

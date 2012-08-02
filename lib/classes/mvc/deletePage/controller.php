@@ -5,6 +5,7 @@ require_once($ba_config->appPath.'lib/functions/checkURL.php');
 require_once($ba_config->appPath.'lib/functions/createDirs.php');
 require_once($ba_config->appPath.'lib/functions/removeDir.php');
 require_once($ba_config->appPath.'lib/classes/mvc/menu/viewMenuList.php');
+require_once($ba_config->appPath.'mods/authMod/mvc/permissions/controller.php');
 /***
  * Контроллер вывода страницы "Удаление пользовательских страниц"
  */
@@ -12,6 +13,14 @@ require_once($ba_config->appPath.'lib/classes/mvc/menu/viewMenuList.php');
  {
  	function run($getUrl = "", $post = "", $viewMode = 0, $pageType = 0) // $viewMode - если не равен 0, то выводится редактирование страницы в админке
 	{
+		$usersPerms = new cUser();
+		 
+		if($pageType == 0 && !$usersPerms->deletePage)
+			$usersPerms->forbidden();
+		
+		if($pageType != 0 && !$usersPerms->deleteControlPage)
+			$usersPerms->forbidden();
+
 		if($pageType == 0)
 			$table = new table_pages();
 		else

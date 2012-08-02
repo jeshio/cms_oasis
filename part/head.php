@@ -4,6 +4,14 @@ empty($ba_htmlHead) ? $ba_htmlHead = "" : $ba_htmlHead;
 empty($ba_htmlTitle) ? $ba_htmlTitle = "" : $ba_htmlTitle;
 empty($ba_htmlDesc) ? $ba_htmlDesc = "" : $ba_htmlDesc;
 empty($ba_htmlKW) ? $ba_htmlKW = "" : $ba_htmlKW;
+require_once dirname(dirname(__FILE__)).'/mods/authMod/auth.php';
+$toAuth = $cAuth->run($_POST, $_GET);
+
+require_once dirname(dirname(__FILE__)).'/mods/authMod/mvc/permissions/controller.php';
+$user = new cUser;
+
+if(!$user->seePage)
+	$user->forbidden();
 ?>
 <!DOCTYPE html>
 <html>
@@ -15,6 +23,7 @@ empty($ba_htmlKW) ? $ba_htmlKW = "" : $ba_htmlKW;
     <style type="text/css">
     <?php include dirname(dirname(__FILE__)).'/css/full.css'; ?>
     </style>
+    <link rel="shortcut icon" href="/favicon.ico" />
     <?=$ba_htmlHead // если будут дополнительные параметры ?>
 </head>
 <body>
@@ -39,21 +48,34 @@ empty($ba_htmlKW) ? $ba_htmlKW = "" : $ba_htmlKW;
 </div>
 <!-- левое меню конец -->
 <div class="menuUnder">
+<?php
+if($user->createPage)
+{
+?>
 <div id="addPage">
 <a href="<?=$ba_config->path.'addPage'?>">Добавить страницу</a>
 </div>
+<?php
+}
+?>
 <div class="normAd">Рекламный блок</div>
 </div>
 </div>
 
 <!-- начало контента -->
 <div id="content">
-<?php if($ba_mode == 1) // админская панель
+<?php if($user->control || $user->deletePage || $user->editPage) // админская панель
 {?>
 <!-- Начало админской панели -->
 <div class="string">
+<?php if($user->editPage) { ?>
 <a href="<?=$ba_config->path.'editPage?pageEdit='.dirname($_SERVER['PHP_SELF'])?>">Редактировать</a>
+<?php }
+if($user->deletePage)
+{
+?>
 <a href="<?=$ba_config->path.'deletePage?pageDel='.dirname($_SERVER['PHP_SELF'])?>">Удалить</a>
+<?php } ?>
 </div>
 <!-- Конец админской панели -->
 <?php } ?>

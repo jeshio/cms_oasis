@@ -40,5 +40,5 @@ http://<?=$_SERVER['SERVER_NAME'].$ba_config->path?>pages/ <input type="text" na
 <br />
 <textarea name="formContent" style="width: 99%;" rows="25"></textarea>
 <br />
-<input type="submit" name="formSubmit" value="Создать страницу"/>
+<input type="submit" name="formCreatePage" value="Создать страницу"/>
 </form>
