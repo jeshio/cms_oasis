@@ -4,6 +4,7 @@ require_once('view.php');
 require_once($ba_config->appPath.'lib/functions/checkURL.php');
 require_once($ba_config->appPath.'lib/functions/createDirs.php');
 require_once($ba_config->appPath.'lib/classes/mvc/menu/viewMenuList.php');
+require_once($ba_config->appPath.'mods/authMod/mvc/permissions/controller.php');
 /***
  * Контроллер вывода страницы "создания страниц для пользователей"
  */
@@ -15,6 +16,11 @@ class cAddPage extends model
 	
     function run($viewMode = 0)
     {
+    	$usersPerms = new cUser();
+    	 
+    	if(!$usersPerms->createPage)
+    		$usersPerms->forbidden();
+    	
 		$table = new table_pages;
 		$config = new totalConfig();
 		$fileContent = 
@@ -25,7 +31,7 @@ class cAddPage extends model
 
 		?>'; // содержимое новых страниц
 		
-		if(empty($_POST)) // дефолтное состояние
+		if(empty($_POST['formCreatePage'])) // дефолтное состояние
 		{	
 			vNewPage::show($viewMode);
 			exit();
@@ -88,6 +94,11 @@ class cAddPage extends model
 	
 	function runEdit($getUrl = "", $postData = "", $viewMode = 0) // $viewMode - если не равен 0, то выводится редактирование страницы в админке
 	{
+		$usersPerms = new cUser();
+		
+		if(!$usersPerms->editPage)
+			$usersPerms->forbidden();
+		
 		$table = new table_pages;
 		
 		$urlEdit = $this->repairURL(filterData($getUrl), 1);

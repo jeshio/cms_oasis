@@ -124,6 +124,9 @@
 .blockMenu a {
   color: rgb(60, 90, 180);
 }
+.rightMenuContent { /* Большой блок в правом меню */
+  text-align: center;
+}
 #addPage {
   text-align: center;
 }

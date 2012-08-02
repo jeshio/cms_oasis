@@ -14,25 +14,43 @@ class cRegistration
 
 	/**
 	 * Запуск регистрации нового пользователя
+	 * $modeAdmin = 1 - закидывает нового пользователя в группу админов (для регистрации админа)
 	 * @param unknown_type $userData
 	 */
-	function runReg($userData = "")
+	function runReg($userData = "", $get = "", $modeAdmin = 0)
 	{
 		$modConfig = new authModConfig();
 		$mysql = new modelAuthMod();
 		$table = new tableUsers();
+		$emailFrom = $_SERVER['SERVER_NAME']; // поле From в отсылаемом письме для подтверждения
 
-		if (empty($userData))
+		if (empty($userData['login']) && empty($userData['password']) && empty($userData['confPassword']) && empty($userData['email']) && empty($userData['regi']))
 		{
+			if(!empty($get)) // подтверждение e-mail'а
+			{
+				$login = filterData($get['login'], $modConfig->maxLenLogin);
+				$hash = filterData($get['hash'], 255);
+				if ($mysql->checkHashForEmail($hash, $login))
+				{
+					$result[1][] = 'E-mail успешно подтверждён! Теперь можете войти.';
+					vRegistration::showErr($result, false);
+				}
+				else 
+				{
+					$result[1][] = 'Неверная ссылка. Возможно e-mail уже подтверждён.';
+					vRegistration::showErr($result, false);
+				}
+				return 0;
+			}
 			vRegistration::show();
-			exit();
+			return 0;
 		}
 
 		// Фильтрация данных
 
 		$login = filterData($userData['login']);
-		$password = passEncode(filterData($userData['password']));
-		$confPassword = filterData($userData['confPassword']);
+		$password = trim($userData['password']);
+		$confPassword = trim($userData['confPassword']);
 		$email = filterData($userData['email']);
 
 		// Ошибки с ключом 0, означают незаполненые поля
@@ -51,7 +69,8 @@ class cRegistration
 		
 		$this->error[1] = "";
 		if(!preg_match($modConfig->regLogin, $login) && !empty($login))
-			$this->error[1][] .= 'Логин может содержать только латиницу, кириллицу, цифры и знак _';
+			$this->error[1][] .= 'Логин может содержать только <b>латиницу</b>, <b>кириллицу</b>, <b>цифры</b> и знак <b>_</b>
+		и должен <b>начинаться буквой</b>, а <b>кончаться буквой или цифрой</b>';
 
 		if(!preg_match($modConfig->regEmail, $email) && !empty($email))
 			$this->error[1][] .= 'E-mail должен быть такого вида: example@host.com';
@@ -84,21 +103,54 @@ class cRegistration
 		if(!empty($email) && $mysql->dataExist($table->table, $table->email, $email))
 			$this->error[1][] = 'Аккаунт с такой электронной почтой <b>'.$email.'</b> - уже существует';
 		
+		// Пробуем послать сообщение на почту, если включено подтверждение по почте
+		
+		if($modConfig->emailConfirm && $modeAdmin == 0)
+		{
+			$headers  = "Content-type: text/html; charset=utf-8 \r\n";
+			$headers .= 'From: '.$_SERVER['SERVER_NAME'];
+			$hash     = filterData(md5(rand(99, 9999).time()), 255);
+			$subject  = 'Подтвержение регистрации - '.$login.' на сайте '.$_SERVER['SERVER_NAME'];
+			//здесь вам нужно поменять значение yousite на свой домен
+			$message  = '<p>Этот E-mail был использован при регистрации на сайте '.$_SERVER['SERVER_NAME'].'</p>'.
+					'<p>Подтвердите регистрацию по предложенной ссылке:</p>'.
+					'<p><a href="http://'.$_SERVER['SERVER_NAME'].$_SERVER['PHP_SELF'].'?hash='.$hash.'&login='.$login.'">'.
+					$_SERVER['SERVER_NAME'].$_SERVER['PHP_SELF'].'?hash='.$hash.'&login='.$login.'</a></p>'.
+					'</p>'.
+					'<p>Если вы не регистрировались на этом сайте, пожалйуста удалите письмо.</p>'.
+					'<p>Письмо отправлено автоматически. Просим вас на него не отвечать.</p>';
+			
+			//отправляем письмо
+			if(!mail($email, $subject, $message, $headers))
+			{
+				$this->error[1][] = 'На этот e-mail <b>'.$email.'</b> невозможно отправить письмо с подтверждением. Введите рабочий e-mail.';
+			}
+		}
+		
 		// Если есть хоть одна ошибка, передаём её на представление ошибок, и вырубаем продолжение скрипта
 		
 		if (!empty($this->error[0]) || !empty($this->error[1]))
 		{
 			vRegistration::showErr($this->error);
-			exit();
+			return 0;
 		}
 		
 		// теперь, когда нет ошибок, можно вносить данные
 		
-		// FIXME исправить $_SERVER, чтобы отправлял ip-Адрес и добавить прокси
-		// TODO вставить запрос
-		echo $table->addToTable($login, $password, 5, $email, $_SERVER['USER_AGENT']);
+		$userIP = filterData($_SERVER['REMOTE_ADDR'], 15) ;
+		$userProxy = filterData(getenv("HTTP_X_FORWARDED_FOR"), 15);
 		
-		vRegistration::showResult();
+		$password = passEncode($password);
+				
+		if($modConfig->emailConfirm && $modeAdmin == 0)
+			$mysql->query($table->addToTable($login, $password, 15, $email, $userIP, $userProxy, 0, $hash));
+		else if($modeAdmin == 0)
+			$mysql->query($table->addToTable($login, $password, 15, $email, $userIP, $userProxy, 1));
+		else if($modeAdmin == 1)
+			$mysql->query($table->addToTable($login, $password, 1, $email, $userIP, $userProxy, 1));
+		
+		vRegistration::showResult($modeAdmin);
+		return 0;
 	}
 }
 

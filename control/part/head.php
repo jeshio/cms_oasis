@@ -5,6 +5,11 @@
 	empty($ba_htmlHead) ? $ba_htmlHead = "" : $ba_htmlHead;
 	empty($ba_htmlTitle) ? $ba_htmlTitle = "" : $ba_htmlTitle;
 	empty($ba_mode) ? $ba_mode=0 : $ba_mode;
+	require_once $ba_config->appPath.'/mods/authMod/mvc/permissions/controller.php';
+	$user = new cUser;
+	
+	if(!$user->seeControlPage)
+		$user->forbidden();
 ?>
 <!DOCTYPE html>
 <html>

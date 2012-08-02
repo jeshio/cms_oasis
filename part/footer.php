@@ -5,9 +5,7 @@
 
 <!-- правое меню начало -->
 <div class="menuRight">
-<div class="paddingContent">
 <?php include("menu/rightMenu.php") ?>
-</div>
 </div>
 <!-- правое меню конец -->
 
@@ -20,7 +18,14 @@
 <!-- Подвал начало -->
 <div id="footer">
 <div class="paddingContent">
+<?php
+if($user->seeControlPage)
+{
+?>
 <a href="/control/">Администрирование</a>
+<?php
+}
+?>
 <p><font color="blue">&copy; Copyright  by jeshio</font></p>
 </div></div>
 <!-- Подвал конец -->

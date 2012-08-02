@@ -7,8 +7,8 @@ class authModConfig
 	var $emailConfirm = true; // подтверждение e-mail'а
 	
 	// Регулярные выражения
-	var $regLogin = '/[0-9a-zАаБбВвГгДдЕеЁёЖжЗзИиЙйКкЛлМмНнОоПпРрСсТтУуФфХхЦцЧчШшЩщЪъЫыЬьЭэЮюЯя_]/i';
-	var $regEmail = '/[0-9a-z_](@)[0-9a-z_](.)[a-z]{2,4}/i';
+	var $regLogin = '/^[a-z\x7F-\xFF][0-9a-z\x7F-\xFF_][0-9a-z\x7F-\xFF]+$/i';
+	var $regEmail = '/[0-9a-z_\-\.]+(@){1}[0-9a-z_]+(\.){1}[a-z]{2,4}+/i';
 	
 	// Минимальное количество символов
 	var $minLenLogin = 3;
@@ -20,3 +20,4 @@ class authModConfig
 	var $maxLenPass = 20;
 	var $maxLenEmail = 60;
 }
+?>

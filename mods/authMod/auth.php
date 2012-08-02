@@ -1,4 +1,5 @@
 <?php
 require_once 'mvc/auth/controller.php';
-$cAuth->run($_POST);
+$cAuth = new cAuth();
+$cAuth->run($_POST, $_GET);
 ?>

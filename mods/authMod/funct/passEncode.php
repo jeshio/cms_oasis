@@ -5,7 +5,6 @@
  */
 function passEncode($pass)
 {
-	// FIXME сделать шифрование
 	$result = sha1(md5($pass));
 	return $result;
 }

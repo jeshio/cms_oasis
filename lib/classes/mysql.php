@@ -130,14 +130,14 @@ class table_pages
         $config = new totalConfig;
         return 'CREATE TABLE IF NOT EXISTS '.$this->table.'('.
                $config->id.' MEDIUMINT NOT NULL AUTO_INCREMENT, '.
-               $this->title.' CHAR(255) NOT NULL, '.
-               $this->menuName.' CHAR(255) NOT NULL, '.
+               $this->title.' VARCHAR(255) NOT NULL, '.
+               $this->menuName.' VARCHAR(255) NOT NULL, '.
                $this->pos.' SMALLINT NOT NULL, '.
-               $this->kw.' CHAR(255) NOT NULL, '.
-               $this->desc.' CHAR(255) NOT NULL, '.
+               $this->kw.' VARCHAR(255) NOT NULL, '.
+               $this->desc.' VARCHAR(255) NOT NULL, '.
                $this->content.' TEXT NOT NULL, '.
                $this->visible.' TINYINT(1) NOT NULL, '.
-               $this->uri.' CHAR(255) NOT NULL, '.
+               $this->uri.' VARCHAR(255) NOT NULL, '.
                $this->created.' TIMESTAMP, '.
                $this->modTime.' TIMESTAMP, 
                PRIMARY KEY('.$config->id.')
@@ -200,11 +200,11 @@ class table_controlPages
         $config = new totalConfig;
         return 'CREATE TABLE '.$this->table.'('.
                $config->id.' MEDIUMINT NOT NULL AUTO_INCREMENT, '.
-               $this->title.' CHAR(255) NOT NULL, '.
-               $this->menuName.' CHAR(255) NOT NULL, '.
+               $this->title.' VARCHAR(255) NOT NULL, '.
+               $this->menuName.' VARCHAR(255) NOT NULL, '.
                $this->pos.' SMALLINT NOT NULL, '.
                $this->content.' TEXT NOT NULL, '.
-               $this->uri.' CHAR(255) NOT NULL,
+               $this->uri.' VARCHAR(255) NOT NULL,
                PRIMARY KEY('.$config->id.')
                ) ENGINE = MYISAM COLLATE utf8_general_ci';
     }

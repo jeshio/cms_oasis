@@ -2,6 +2,7 @@
 require_once(dirname(dirname(__FILE__)).'/model.php');
 require_once('view.php');
 require_once($ba_config->appPath.'lib/functions/checkURL.php');
+require_once($ba_config->appPath.'mods/authMod/mvc/permissions/controller.php');
 /***
  * Контроллер вывода страницы "создания страниц"
  */
@@ -14,6 +15,11 @@ class cNewPage extends model
     
     function run()
     {
+    	$usersPerms = new cUser();
+    	
+    	if(!$usersPerms->createControlPage)
+    		$usersPerms->forbidden();
+    	
 		$table = new table_controlPages;
 		$config = new totalConfig();
 		$regular = '/[^0-9a-zа-яАаБбВвГгДдЕеЁёЖжЗзИиЙйКкЛлМмНнОоПпРрСсТтУуФфХхЦцЧчШшЩщЪъЫыЬьЭэЮюЯя ]/i'; // название меню рег
@@ -81,6 +87,10 @@ class cNewPage extends model
 	
 	function runEdit()
 	{
+		$usersPerms = new cUser();
+		 
+		if(!$usersPerms->editControlPage)
+			$usersPerms->forbidden();
 		$table = new table_controlPages;
 		
 		$urlEdit = $this->repairURL(filterData($_GET['pageEdit']), 1);

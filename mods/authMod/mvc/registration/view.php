@@ -15,8 +15,10 @@ class vRegistration
 	/**
 	 * Показать ошибки при заполнении полей на странице регистрации
 	 */
-	static function showErr($error)
+	static function showErr($error, $regForm = true)
 	{
+		if($regForm)
+			vRegistration::show();
 		if(!empty($error[0])) // не заполненые поля
 		{
 			echo 'Не заполнены поля:';
@@ -43,14 +45,19 @@ class vRegistration
 	/**
 	 * Показать результат регистрации
 	 */
-	static function showResult()
+	static function showResult($modeAdmin = 0)
 	{
 		$config = new authModConfig();
 		echo 'Новый пользователь успешно зарегестрирован!';
-		if($config->emailConfirm)
+		if($config->emailConfirm && $modeAdmin == 0)
 		{
 			echo '<br />';
 			echo 'Теперь проверьте свою почту и подтвердите введённый E-mail.';
+		}
+		if ($modeAdmin == 1)
+		{
+			echo '<br />';
+			echo '<b>Не забудьте удалить папку с этим файлом!('.__FILE__.'</b>';
 		}
 	}
 }
